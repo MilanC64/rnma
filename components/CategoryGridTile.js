@@ -18,8 +18,8 @@ const CategoryGridTile = props => {
 const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
-        margin: 15,
-        height: 90
+        margin: 16,
+        height: 150
     },
     container: {
         flex: 1,

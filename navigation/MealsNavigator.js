@@ -11,6 +11,19 @@ import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 
+const FavNavigator = createStackNavigator({
+    Favorites: FavoritesScreen,
+    MealDetail: MealDetailScreen
+},
+{
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: "white"
+    }
+});
+
 const MealsNavigator = createStackNavigator({
     Categories: {
         screen: CategoriesScreen
@@ -42,7 +55,7 @@ const tabScreenConfig = {
         }
     },
     Favorites: {
-        screen: FavoritesScreen,
+        screen: FavNavigator,
         navigationOptions: {
             tabBarIcon: (tabInfo) => {
                 return <Icon name='ios-star' size={25} color={tabInfo.tintColor}/>
