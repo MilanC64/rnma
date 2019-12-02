@@ -1,6 +1,8 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Colors from '../constants/Colors';
 
@@ -10,10 +12,15 @@ import MealDetailScreen from '../screens/MealDetailScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 
 const MealsNavigator = createStackNavigator({
-    Categories: CategoriesScreen,
-    CategoryMeals: CategoryMealsScreen,
-    MealDetail: MealDetailScreen,
-    Favorites: FavoritesScreen
+    Categories: {
+        screen: CategoriesScreen
+    },
+    CategoryMeals: {
+        screen: CategoryMealsScreen
+    },
+    MealDetail: {
+        screen: MealDetailScreen
+    }
 },
 {
     defaultNavigationOptions: {
@@ -24,9 +31,32 @@ const MealsNavigator = createStackNavigator({
     }
 });
 
-const MealsFavTabsNavigator = createBottomTabNavigator({
-    Meals: MealsNavigator,
-    Favorites: FavoritesScreen
+const tabScreenConfig = {
+    Meals: {
+        screen: MealsNavigator,
+        navigationOptions: {
+            tabBarIcon: (tabInfo) => {
+                return <Icon name='ios-restaurant' size={25} color={tabInfo.tintColor}/>
+            },
+            tabBarColor: Colors.primaryColor
+        }
+    },
+    Favorites: {
+        screen: FavoritesScreen,
+        navigationOptions: {
+            tabBarIcon: (tabInfo) => {
+                return <Icon name='ios-star' size={25} color={tabInfo.tintColor}/>
+            },
+            tabBarColor: Colors.accentColor
+        }
+    }
+};
+
+const MealsFavTabsNavigator = createMaterialBottomTabNavigator(
+    tabScreenConfig, 
+{
+    activeColor: 'white',
+    shifting: true
 });
 
 //wrapp stackNavigator inside appContainer
