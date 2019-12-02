@@ -2,6 +2,7 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Colors from '../constants/Colors';
@@ -10,6 +11,7 @@ import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import FiltersScreen from '../screens/FiltersScreen';
 
 const FavNavigator = createStackNavigator({
     Favorites: FavoritesScreen,
@@ -72,5 +74,14 @@ const MealsFavTabsNavigator = createMaterialBottomTabNavigator(
     shifting: true
 });
 
+const FiltersNavigator = createStackNavigator({
+    Filters: FiltersScreen
+});
+
+const MainNavigator = createDrawerNavigator({
+    MealsFav: MealsFavTabsNavigator,
+    Filters: FiltersNavigator
+});
+
 //wrapp stackNavigator inside appContainer
-export default createAppContainer(MealsFavTabsNavigator);
+export default createAppContainer(MainNavigator);
