@@ -1,12 +1,23 @@
 import React from 'react';
+import { useScreens } from 'react-native-screens';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
 import MealsNavigator from './navigation/MealsNavigator';
-import { useScreens } from 'react-native-screens';
+import mealsReducer from './store/reducers/meals';
 
 useScreens();
 
+const rootReducer = combineReducers({
+  meals: mealsReducer
+});
+
+const store = createStore(rootReducer);
+
 export default function App() {
-  return <MealsNavigator />
+  return <Provider store={store}>
+            <MealsNavigator />
+         </Provider>
 }
 
 
